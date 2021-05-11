@@ -1,0 +1,96 @@
+<meta charset="utf-8">
+<style>
+li a:hover, .dropdown:hover .dropdown-item:hover {
+    background-color:lightgray;
+  }
+li a:active, .dropdown:active .dropdown-item:active{
+  background-color: #4CAF50;
+  color: white;
+}
+
+</style>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+  <title>Vaccinated details {% block title %}{% endblock %}</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <head><script>
+    function startTime() {
+      var today = new Date();
+      var h = today.getHours();
+      var m = today.getMinutes();
+      var s = today.getSeconds();
+      m = checkTime(m);
+      s = checkTime(s);
+      document.getElementById('txt').innerHTML =
+      h + ":" + m + ":" + s;
+      var t = setTimeout(startTime, 500);
+    }
+    function checkTime(i) {
+      if (i < 10) {i = "0" + i};  // add zero in front of numbers < 10
+      return i;
+    }
+    </script></head> <body onload="startTime()">
+<nav  class="navbar navbar-expand-lg navbar-light bg-Primary">
+<div class="container">
+<a class="navbar-brand" >
+        {% load static %}
+    <img src={% static "image/cboa.png" %} alt="Logo" style="width:400px; height: 80px;">
+</a>
+<!--<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+<span class="navbar-toggler-icon"></span>
+</button>-->
+<div class="collapse navbar-collapse" id="navbarSupportedContent">
+  <ul class="navbar-nav ">
+          
+              <li class="nav-item">
+                  <strong><a class ="nav-link" href="{% url 'admin:index' %}">Admin Login</a></strong>
+              </li>
+              
+</ul>
+</div>
+</div>
+</nav> <h8><p style="text-align:center">Welcome {{user.first_name|default:'Comrades'}} {{user.last_name }} , {% now "D, d M Y" %}, <a id="txt"></a> </p></h8>
+{% if messages %}
+    {% for msg in messages %}   
+    <div class="container">
+        <h5 style="text-align:center" class="alert {{msg.tags}}">
+        <u>{{msg.message}}</u>
+        </h5>
+    </div>
+    {% endfor %}
+{% endif %}
+{% if messages %}
+        {% for message in messages %}
+            {% if message.tags == 'success'%}
+                <script>M.toast({html: "{{message}}", classes: 'green rounded', displayLength:2000});</script>
+            {% elif message.tags == 'info'%}
+                <script>M.toast({html: "{{message}}", classes: 'blue rounded', displayLength:2000});</script>
+            {% elif message.tags == 'warning'%}
+                <script>M.toast({html: "{{message}}", classes: 'orange rounded', displayLength:10000});</script>
+            {% elif message.tags == 'error'%}
+                <script>M.toast({html: "{{message}}", classes: 'red rounded', displayLength:10000});</script>
+            {% endif %}
+        {% endfor %}
+{% endif %}
+<div class="container" onload="startTime()">
+{% block page_content %}{% endblock %}
+</div>
+<style>
+        .footer {
+          position: fixed;
+          left: 0;
+          bottom: 0;
+          width: 100%;
+          background-color: #0159dd;
+          color: deepskyblue;
+          text-align: center;
+        }
+  </style>
+        
+<div class="footer">
+        <p>Created By Sandeep Maji, CBOA @{% now "Y" %}</p>
+        
+</body>

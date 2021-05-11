@@ -1,0 +1,94 @@
+{% extends 'base.html' %}
+{% block title %}| add staff {% endblock %}
+{% block page_content %}
+{% if form.errors %}
+    {% for field in form %}
+        {% for error in field.errors %}
+            <div style="text-align:center" class="alert alert-danger">
+                <a ><strong>{{ error|escape }}</strong></a>
+            </div>
+        {% endfor %}
+    {% endfor %}
+    {% for error in form.non_field_errors %}
+        <div class="alert alert-danger">
+            <strong>{{ error|escape }}</strong>
+        </div>
+    {% endfor %}
+{% endif %}
+ 
+<style>
+    input::-webkit-outer-spin-button,
+    input::-webkit-inner-spin-button {
+       -webkit-appearance: none;
+       margin: 0;
+    }
+    input[type="number"] {
+       -moz-appearance: textfield;
+    }
+    </style>
+
+<div class="row">  
+    <div class="col-sm-2">
+<!-- 2 empty sections in the left -->
+      <table style="height:100%">
+          <tr>
+              <td style="height:30%"></td>
+          </tr>
+          <tr>
+              <td style="height:30%"><h5 style='text-align:justify'>
+              </h5></td>
+          </tr>
+          <tr>
+              <td style="height:30%"></td>
+          </tr>
+      </table>
+    </div>
+    <div class="col-sm-8">
+<!--Your form goes here -->  
+        <div class="panel panel-default">
+          <p ><h3 class="alert alert-success" style="text-align:center" class="panel-heading">
+            <strong>Add Vaccinated Details :</strong></h3></p>
+            <div style="text-align:center" class="panel-body">
+                <form class="alert alert-success" enctype="multipart/form-data" method="post">
+                    {% csrf_token %}
+                    {{ form1.as_p }}
+                    {% for field in form %}
+                  <table style="width:100%" border="1px solid black">
+                      <tr>
+                              <th style="width:30%">{{field.label_tag}}:</th>
+                              <td colspan="2">{{ field }}</td>
+                      </tr>
+                  </table>
+                  <!--<p>{{field.label_tag}}
+                  {{ field }}
+                  {{ field.help_text | safe }}</p>-->
+                  {% endfor %}
+                    <small><p>Enter 10 digit mobile numbers only</p></small>
+                    <input class="btn btn-primary" type="submit" value="Add Details">
+                    &nbsp &nbsp<input class="btn btn-primary" type="reset" value="Reset">
+                  </form>
+                  &nbsp &nbsp
+                  <br>
+            </div>
+            
+        </div>      
+    </div> 
+    <div class="col-sm-2">
+      <table style="height:100%">
+          <tr>
+              <td style="height:30%"></td>
+          </tr>
+          <tr>
+        
+          </tr>
+          <tr>
+              <td style="height:30%"></td>
+          </tr>
+      </table>
+      
+<!-- 2 empty sections in the right -->
+    </div>
+  </div>
+</div>
+
+{% endblock %}
