@@ -1,0 +1,2 @@
+# vaccinatedDetails
+staff vaccinated details
