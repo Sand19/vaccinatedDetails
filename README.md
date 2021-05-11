@@ -1,2 +1,2 @@
 # vaccinatedDetails
-staff vaccinated details
+records of staff vaccinated details
